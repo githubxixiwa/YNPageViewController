@@ -125,6 +125,8 @@ typedef NS_ENUM(NSInteger, YNPageHeaderViewScaleMode) {
 @property (nonatomic, assign) CGFloat coverCornerRadius;
 /** 选项相邻间隙 15 */
 @property (nonatomic, assign) CGFloat itemMargin;
+/** 每个按钮的宽度 */
+@property(nonatomic ,assign) CGFloat itemWidth;
 /** 选项左边或者右边间隙 15 */
 @property (nonatomic, assign) CGFloat itemLeftAndRightMargin;
 /** 选项字体 14 */

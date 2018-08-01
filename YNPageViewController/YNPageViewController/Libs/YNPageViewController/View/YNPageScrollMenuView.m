@@ -98,7 +98,9 @@
     [itemButton addTarget:self action:@selector(itemButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [itemButton sizeToFit];
-    
+    if (self.configration.itemWidth) {
+        itemButton.yn_width = self.configration.itemWidth;
+    }
     [self.itemsWidthArraM addObject:@(itemButton.yn_width)];
     [self.itemsArrayM addObject:itemButton];
     [self.scrollView addSubview:itemButton];
