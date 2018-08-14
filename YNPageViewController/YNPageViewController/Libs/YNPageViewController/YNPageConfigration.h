@@ -87,6 +87,10 @@ typedef NS_ENUM(NSInteger, YNPageHeaderViewScaleMode) {
 @property (nonatomic, copy) NSString *addButtonHightImageName;
 /** 按钮背景 */
 @property (nonatomic, strong) UIColor *addButtonBackgroundColor;
+/** 按钮大小 */
+@property (nonatomic, assign) CGSize addButtonSize;
+/** 按钮右边距 */
+@property (nonatomic, assign) CGFloat addButtonRight;
 /** 线条color */
 @property (nonatomic, strong) UIColor *lineColor;
 /** 遮盖color */

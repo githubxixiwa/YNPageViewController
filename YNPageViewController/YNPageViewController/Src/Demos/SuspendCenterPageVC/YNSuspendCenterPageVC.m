@@ -50,7 +50,6 @@
     configration.aligmentModeCenter = NO;
     configration.lineWidthEqualFontWidth = NO;
     configration.showBottomLine = YES;
-    
     return [self suspendCenterPageVCWithConfig:configration];
 }
 

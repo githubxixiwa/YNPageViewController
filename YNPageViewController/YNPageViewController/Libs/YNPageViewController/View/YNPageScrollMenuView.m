@@ -108,13 +108,15 @@
 }
 
 - (void)setupOtherViews {
-    
     self.scrollView.frame = CGRectMake(0, 0, self.configration.showAddButton ? self.yn_width - self.yn_height : self.yn_width, self.yn_height);
     
     [self addSubview:self.scrollView];
-    
     if (self.configration.showAddButton) {
-        self.addButton.frame = CGRectMake(self.yn_width - self.yn_height, 0, self.yn_height, self.yn_height);
+        if (self.configration.addButtonSize.height > 0) {
+            self.addButton.frame = CGRectMake(self.yn_width - self.configration.addButtonSize.width - self.configration.addButtonRight, (self.yn_height - self.configration.addButtonSize.height) / 2, self.configration.addButtonSize.width, self.configration.addButtonSize.height);
+        }else{
+            self.addButton.frame = CGRectMake(self.yn_width - self.yn_height, 0, self.yn_height, self.yn_height);
+        }
         [self addSubview:self.addButton];
     }
     
@@ -491,9 +493,9 @@
         _addButton = [[UIButton alloc] init];
         [_addButton setBackgroundImage:[UIImage imageNamed:self.configration.addButtonNormalImageName] forState:UIControlStateNormal];
         [_addButton setBackgroundImage:[UIImage imageNamed:self.configration.addButtonHightImageName] forState:UIControlStateHighlighted];
-        _addButton.layer.shadowColor = [UIColor grayColor].CGColor;
-        _addButton.layer.shadowOffset = CGSizeMake(-1, 0);
-        _addButton.layer.shadowOpacity = 0.5;
+//        _addButton.layer.shadowColor = [UIColor grayColor].CGColor;
+//        _addButton.layer.shadowOffset = CGSizeMake(-1, 0);
+//        _addButton.layer.shadowOpacity = 0.5;
         _addButton.backgroundColor = self.configration.addButtonBackgroundColor;
         [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
