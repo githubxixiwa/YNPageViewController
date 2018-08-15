@@ -88,6 +88,7 @@
 
 - (CGFloat)lineHeight {
     return _showScrollLine ? _lineHeight : 0;
+    
 }
 
 - (CGFloat)deltaScale {

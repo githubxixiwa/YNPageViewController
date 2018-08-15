@@ -16,6 +16,8 @@
 
 @property (nonatomic, copy) NSArray *imagesURLs;
 
+
+
 @end
 
 @implementation YNSuspendCenterPageVC

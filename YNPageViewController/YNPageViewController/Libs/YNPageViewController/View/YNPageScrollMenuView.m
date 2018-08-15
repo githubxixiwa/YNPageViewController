@@ -493,9 +493,6 @@
         _addButton = [[UIButton alloc] init];
         [_addButton setBackgroundImage:[UIImage imageNamed:self.configration.addButtonNormalImageName] forState:UIControlStateNormal];
         [_addButton setBackgroundImage:[UIImage imageNamed:self.configration.addButtonHightImageName] forState:UIControlStateHighlighted];
-//        _addButton.layer.shadowColor = [UIColor grayColor].CGColor;
-//        _addButton.layer.shadowOffset = CGSizeMake(-1, 0);
-//        _addButton.layer.shadowOpacity = 0.5;
         _addButton.backgroundColor = self.configration.addButtonBackgroundColor;
         [_addButton addTarget:self action:@selector(addButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }

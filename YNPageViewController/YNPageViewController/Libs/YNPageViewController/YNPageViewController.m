@@ -323,6 +323,12 @@
     }
 }
 
+- (void)reloadSubontrollerView:(NSInteger)viewNum{
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(pageViewController:pageForIndex:)]) {
+        [self.dataSource pageViewController:self pageForIndex:viewNum];
+    }
+}
+
 #pragma mark - YNPageScrollMenuViewDelegate
 - (void)pagescrollMenuViewItemOnClick:(UIButton *)label index:(NSInteger)index {
     
@@ -506,10 +512,12 @@
             NSString *title = self.titlesM[i];
             if(self.cacheDictM[title]) {
                 UIScrollView *scrollView = [self getScrollViewWithPageIndex:i];
-                scrollView.contentInset = UIEdgeInsetsMake(_insetTop, 0, 0, 0);
-                if ([self isSuspensionBottomStyle]) {
-                    /// 设置偏移量
-                    scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(_insetTop, 0, 0, 0);
+                if (scrollView.contentInset.top != _insetTop) {
+                    scrollView.contentInset = UIEdgeInsetsMake(_insetTop, 0, 0, 0);
+                    if ([self isSuspensionBottomStyle]) {
+                        /// 设置偏移量
+                        scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(_insetTop, 0, 0, 0);
+                    }
                 }
             }
         }

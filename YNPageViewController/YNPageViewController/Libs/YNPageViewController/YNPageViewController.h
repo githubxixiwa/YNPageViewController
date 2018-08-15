@@ -35,7 +35,6 @@
  */
 - (void)pageViewController:(YNPageViewController *)pageViewController
         didEndDecelerating:(UIScrollView *)scrollView;
-
 /**
  UIScrollView滚动时回调, 可用来自定义 ScrollMenuView
  
@@ -189,6 +188,8 @@
  * YNPageStyleSuspensionCenter 样式 1.需要在下拉刷新完成时调用该方法
  */
 - (void)reloadSuspendHeaderViewFrame;
+///重新刷新 controllerView
+- (void)reloadSubontrollerView:(NSInteger)viewNum;
 
 /**
  滚动到顶部(置顶)
