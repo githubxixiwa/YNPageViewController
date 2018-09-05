@@ -119,7 +119,15 @@
             [self.view addSubview:self.scrollMenuView];
             break;
         case YNPageStyleNavigation:
-            self.navigationItem.titleView = self.scrollMenuView;
+        {
+            UIViewController *vc;
+            if ([self.parentViewController isKindOfClass:[UINavigationController class]]) {
+                vc = self;
+            } else {
+                vc = self.parentViewController;
+            }
+            vc.navigationItem.titleView = self.scrollMenuView;
+        }
             break;
         case YNPageStyleSuspensionTopPause:
             [self.bgScrollView addSubview:self.scrollMenuView];
