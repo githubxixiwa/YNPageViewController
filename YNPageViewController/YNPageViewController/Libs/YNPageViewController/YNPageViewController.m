@@ -370,10 +370,9 @@
             [self.pageScrollView scrollRectToVisible:frame animated:YES];
         }else{
             [self.pageScrollView scrollRectToVisible:frame animated:NO];
-            
+            [self scrollViewDidEndDecelerating:self.pageScrollView];
         }
     }
-    [self scrollViewDidEndDecelerating:self.pageScrollView];
 }
 
 - (void)updateMenuItemTitle:(NSString *)title index:(NSInteger)index {
