@@ -248,7 +248,10 @@
         [self.delegate pageViewController:self didEndDecelerating:scrollView];
     }
 }
-
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    NSLog(@"scrollViewDidEndScrollingAnimation  2");
+    [self scrollViewDidEndDecelerating:self.pageScrollView];
+}
 /// scrollView滚动ing
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.bgScrollView) {
@@ -281,6 +284,8 @@
         [self.delegate pageViewController:self didScroll:scrollView progress:progress formIndex:floor(offsetX) toIndex:ceilf(offsetX)];
     }
 }
+
+
 
 #pragma mark - Yn_pageScrollViewDidScrollView
 - (void)yn_pageScrollViewDidScrollView:(UIScrollView *)scrollView {
@@ -365,10 +370,10 @@
             [self.pageScrollView scrollRectToVisible:frame animated:YES];
         }else{
             [self.pageScrollView scrollRectToVisible:frame animated:NO];
-            [self scrollViewDidEndDecelerating:self.pageScrollView];
+            
         }
     }
-    
+    [self scrollViewDidEndDecelerating:self.pageScrollView];
 }
 
 - (void)updateMenuItemTitle:(NSString *)title index:(NSInteger)index {
