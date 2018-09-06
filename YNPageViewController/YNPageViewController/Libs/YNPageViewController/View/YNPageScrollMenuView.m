@@ -507,10 +507,10 @@
     
     self.currentIndex= button.tag;
     
-    [self adjustItemWithAnimated:NO];
+//    [self adjustItemWithAnimated:NO];
     
     if (self.delegate &&[self.delegate respondsToSelector:@selector(pagescrollMenuViewItemOnClick:index:)]) {
-        [self.delegate pagescrollMenuViewItemOnClick:button index:self.lastIndex];
+        [self.delegate pagescrollMenuViewItemOnClick:button index:self.currentIndex];
     }
     
 }
