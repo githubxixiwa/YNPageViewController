@@ -421,11 +421,8 @@
 
 - (void)updateViewWithIndex:(NSInteger)pageIndex {
     
-    if (kYNPAGE_SCREEN_WIDTH >= 375.0f && kYNPAGE_SCREEN_HEIGHT >= 812.0f && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        self.pageScrollView.contentSize = CGSizeMake(kYNPAGE_SCREEN_WIDTH * self.controllersM.count, self.pageScrollView.yn_height - 34);
-    }else{
-        self.pageScrollView.contentSize = CGSizeMake(kYNPAGE_SCREEN_WIDTH * self.controllersM.count, self.pageScrollView.yn_height);
-    }
+    self.pageScrollView.contentSize = CGSizeMake(kYNPAGE_SCREEN_WIDTH * self.controllersM.count, self.pageScrollView.yn_height);
+    
     UIViewController *vc = self.controllersM[pageIndex];
     
     vc.view.yn_x = kYNPAGE_SCREEN_WIDTH * pageIndex;
@@ -594,7 +591,7 @@
         
         self.scrollMenuView.yn_y = self.headerBgView.yn_bottom;
         
-        self.pageScrollView.frame = CGRectMake(0, self.scrollMenuView.yn_bottom, kYNPAGE_SCREEN_WIDTH, contentHeight - self.config.menuHeight  - self.config.suspenOffsetY);
+        self.pageScrollView.frame = CGRectMake(0, self.scrollMenuView.yn_bottom, kYNPAGE_SCREEN_WIDTH, contentHeight + self.headerBgView.yn_height - self.config.suspenOffsetY);
         
         self.pageScrollView.contentSize = CGSizeMake(kYNPAGE_SCREEN_WIDTH * self.controllersM.count, self.pageScrollView.yn_height);
         
