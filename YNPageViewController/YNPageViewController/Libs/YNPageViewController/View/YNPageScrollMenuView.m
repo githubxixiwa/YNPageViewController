@@ -507,7 +507,7 @@
     
     self.currentIndex= button.tag;
     
-    [self adjustItemWithAnimated:YES];
+//    [self adjustItemWithAnimated:NO];
     
     if (self.delegate &&[self.delegate respondsToSelector:@selector(pagescrollMenuViewItemOnClick:index:)]) {
         [self.delegate pagescrollMenuViewItemOnClick:button index:self.lastIndex];
