@@ -360,7 +360,7 @@
     if (frame.origin.x == self.pageScrollView.contentOffset.x) {
         [self scrollViewDidScroll:self.pageScrollView];
     } else {
-        [self.pageScrollView scrollRectToVisible:frame animated:YES];
+        [self.pageScrollView scrollRectToVisible:frame animated:NO];
     }
     [self scrollViewDidEndDecelerating:self.pageScrollView];
     

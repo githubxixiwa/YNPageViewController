@@ -266,10 +266,7 @@
 }
 
 - (void)adjustItemAnimate:(BOOL)animated {
-//    if (self.lastIndex == self.currentIndex) {
-//        return;
-//    }
-    
+
     UIButton *lastButton = self.itemsArrayM[self.lastIndex];
     UIButton *currentButton = self.itemsArrayM[self.currentIndex];
     
@@ -510,10 +507,10 @@
     
     self.currentIndex= button.tag;
     
-//    [self adjustItemWithAnimated:NO];
+    [self adjustItemWithAnimated:NO];
     
     if (self.delegate &&[self.delegate respondsToSelector:@selector(pagescrollMenuViewItemOnClick:index:)]) {
-        [self.delegate pagescrollMenuViewItemOnClick:button index:self.currentIndex];
+        [self.delegate pagescrollMenuViewItemOnClick:button index:self.lastIndex];
     }
     
 }
