@@ -50,6 +50,10 @@
                  formIndex:(NSInteger)fromIndex
                    toIndex:(NSInteger)toIndex;
 
+/// 点击item
+- (void)pagescrollItemindex:(NSInteger)index;
+
+
 /**
  点击UIScrollMenuView AddAction
  

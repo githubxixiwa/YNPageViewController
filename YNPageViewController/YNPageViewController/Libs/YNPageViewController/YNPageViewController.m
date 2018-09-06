@@ -235,7 +235,7 @@
 
 /// scrollView滚动结束
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
+    NSLog(@"scrollViewDidEndDecelerating 1");
     if (scrollView == self.bgScrollView) return;
     if ([self isSuspensionTopPauseStyle]) {
         self.currentScrollView.scrollEnabled = YES;
@@ -251,7 +251,6 @@
 
 /// scrollView滚动ing
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
     if (scrollView == self.bgScrollView) {
         [self calcuSuspendTopPauseWithBgScrollView:scrollView];
         return;
@@ -274,6 +273,7 @@
     [self.scrollMenuView adjustItemWithProgress:progress lastIndex:floor(offsetX) currentIndex:ceilf(offsetX)];
     
     if (floor(offsetX) == ceilf(offsetX)) {
+        NSLog(@"scrollViewDidEndDecelerating 2");
         [self.scrollMenuView adjustItemAnimate:YES];
     }
     
@@ -339,7 +339,9 @@
 
 #pragma mark - YNPageScrollMenuViewDelegate
 - (void)pagescrollMenuViewItemOnClick:(UIButton *)label index:(NSInteger)index {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(pagescrollItemindex:)]) {
+        [self.delegate pagescrollItemindex:index];
+    }
     [self setSelectedPageIndex:index];
 }
 
@@ -351,7 +353,6 @@
 
 #pragma mark - Public Method
 - (void)setSelectedPageIndex:(NSInteger)pageIndex {
-    
     if (self.cacheDictM.count > 0 && pageIndex == self.pageIndex) return;
     
     if (pageIndex > self.controllersM.count - 1) return;
@@ -364,10 +365,9 @@
             [self.pageScrollView scrollRectToVisible:frame animated:YES];
         }else{
             [self.pageScrollView scrollRectToVisible:frame animated:NO];
+            [self scrollViewDidEndDecelerating:self.pageScrollView];
         }
-        
     }
-    [self scrollViewDidEndDecelerating:self.pageScrollView];
     
 }
 
