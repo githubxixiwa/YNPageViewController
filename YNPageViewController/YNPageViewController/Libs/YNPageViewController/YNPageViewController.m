@@ -357,7 +357,11 @@
     if (pageIndex > self.controllersM.count - 1) return;
     
     CGRect frame = CGRectMake(self.pageScrollView.yn_width * pageIndex, 0, self.pageScrollView.yn_width, self.pageScrollView.yn_height);
-    [self.pageScrollView scrollRectToVisible:frame animated:NO];
+    if (frame.origin.x == self.pageScrollView.contentOffset.x) {
+        [self scrollViewDidScroll:self.pageScrollView];
+    } else {
+        [self.pageScrollView scrollRectToVisible:frame animated:YES];
+    }
     [self scrollViewDidEndDecelerating:self.pageScrollView];
     
 }
