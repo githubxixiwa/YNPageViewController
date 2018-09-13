@@ -538,9 +538,11 @@
         [UIView animateWithDuration:.5 animations:^{
             [obj setTitleColor:self.configration.normalItemColor forState:UIControlStateNormal];
             obj.titleLabel.font = self.configration.itemFont;
+            [obj sizeToFit];
             if (idx == self.itemsArrayM.count - 1) {
                 [currentButton setTitleColor:self.configration.selectedItemColor forState:UIControlStateNormal];
                 currentButton.titleLabel.font = self.configration.selectedItemFont;
+                [currentButton sizeToFit];
             }
         }];
         
