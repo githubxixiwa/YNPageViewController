@@ -58,6 +58,8 @@ typedef NS_ENUM(NSInteger, YNPageHeaderViewScaleMode) {
 @property (nonatomic, assign, readonly) CGFloat pageHeaderViewOriginHeight;
 
 #pragma mark - UIScrollMenuView Config
+/** 是否动画效果滑动*/
+@property (nonatomic, assign) BOOL showAnScroller;
 /** 是否显示遮盖*/
 @property (nonatomic, assign) BOOL showConver;
 /** 是否显示线条 YES */

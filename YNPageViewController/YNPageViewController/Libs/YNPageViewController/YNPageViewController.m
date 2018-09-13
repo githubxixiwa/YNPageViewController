@@ -366,7 +366,7 @@
     if (frame.origin.x == self.pageScrollView.contentOffset.x) {
         [self scrollViewDidScroll:self.pageScrollView];
     } else {
-        if (self.config.showNavigation) {
+        if (self.config.showAnScroller) {
             [self.pageScrollView scrollRectToVisible:frame animated:YES];
         }else{
             [self.pageScrollView scrollRectToVisible:frame animated:NO];
