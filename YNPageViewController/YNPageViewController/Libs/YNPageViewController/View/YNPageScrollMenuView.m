@@ -544,6 +544,7 @@
                 currentButton.titleLabel.font = self.configration.selectedItemFont;
                 [currentButton sizeToFit];
                 obj.yn_width = currentButton.yn_width;
+                obj.yn_height = currentButton.yn_height;
             }
         }];
         
