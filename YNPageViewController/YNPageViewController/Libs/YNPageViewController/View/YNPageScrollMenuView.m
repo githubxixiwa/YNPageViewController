@@ -543,6 +543,7 @@
                 [currentButton setTitleColor:self.configration.selectedItemColor forState:UIControlStateNormal];
                 currentButton.titleLabel.font = self.configration.selectedItemFont;
                 [currentButton sizeToFit];
+                obj.yn_width = currentButton.yn_width;
             }
         }];
         
