@@ -530,6 +530,21 @@
     [self setupSubViews];
     
 }
+
+- (void)reloadViewTitleFont{
+    UIButton *currentButton = self.itemsArrayM[self.currentIndex];
+    /// 颜色
+    [self.itemsArrayM enumerateObjectsUsingBlock:^(UIButton  * obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj setTitleColor:self.configration.normalItemColor forState:UIControlStateNormal];
+        obj.titleLabel.font = self.configration.itemFont;
+        if (idx == self.itemsArrayM.count - 1) {
+            
+            [currentButton setTitleColor:self.configration.selectedItemColor forState:UIControlStateNormal];
+            currentButton.titleLabel.font = self.configration.selectedItemFont;
+        }
+    }];
+}
+
 #pragma mark -  addButtonAction
 
 - (void)addButtonAction:(UIButton *)button {

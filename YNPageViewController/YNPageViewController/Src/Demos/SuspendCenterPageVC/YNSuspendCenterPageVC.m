@@ -16,7 +16,8 @@
 
 @property (nonatomic, copy) NSArray *imagesURLs;
 
-
+/** <#Description#> */
+@property (nonatomic, strong) YNPageConfigration *configration;
 
 @end
 
@@ -116,6 +117,10 @@
 - (void)pageViewController:(YNPageViewController *)pageViewController
             contentOffsetY:(CGFloat)contentOffset
                   progress:(CGFloat)progress {
+    
+    self.configration.selectedItemFont = [UIFont systemFontOfSize:22];
+    self.configration.itemFont = [UIFont systemFontOfSize:22];
+    [self.scrollMenuView reloadViewTitleFont];
 //        NSLog(@"--- contentOffset = %f,    progress = %f", contentOffset, progress);
 }
 

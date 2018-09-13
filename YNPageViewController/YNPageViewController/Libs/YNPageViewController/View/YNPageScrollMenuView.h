@@ -68,5 +68,7 @@
 
 /// 重新刷新(创建)
 - (void)reloadView;
+/// 重新刷新font
+- (void)reloadViewTitleFont;
 
 @end
