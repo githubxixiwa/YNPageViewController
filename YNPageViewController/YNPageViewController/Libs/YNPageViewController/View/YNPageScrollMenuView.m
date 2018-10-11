@@ -503,8 +503,8 @@
 #pragma mark - itemButtonTapOnClick
 
 - (void)itemButtonOnClick:(UIButton *)button {
-    
-    self.currentIndex= button.tag;
+    self.lastIndex = self.currentIndex;
+    self.currentIndex = button.tag;
     
     [self adjustItemWithAnimated:NO];
     
