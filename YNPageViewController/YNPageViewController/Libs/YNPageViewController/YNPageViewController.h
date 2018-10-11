@@ -51,7 +51,7 @@
                    toIndex:(NSInteger)toIndex;
 
 /// 点击item
-- (void)pagescrollItemindex:(NSInteger)index;
+- (void)pagescrollItemindex:(NSInteger)index withButton:(UIButton *)currentBtn;
 
 
 /**

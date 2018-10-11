@@ -25,9 +25,10 @@
 @interface YNPageScrollMenuView : UIView
 /// + 按钮
 @property (nonatomic, strong) UIButton *addButton;
-
 /// 标题数组
 @property (nonatomic, strong) NSMutableArray *titles;
+/// items
+@property (nonatomic, strong) NSMutableArray<UIButton *> *itemsArrayM;
 
 + (instancetype)new UNAVAILABLE_ATTRIBUTE;
 

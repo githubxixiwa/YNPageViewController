@@ -32,8 +32,7 @@
 @property (nonatomic, assign) NSInteger lastIndex;
 /// 当前index
 @property (nonatomic, assign) NSInteger currentIndex;
-/// items
-@property (nonatomic, strong) NSMutableArray<UIButton *> *itemsArrayM;
+
 /// item宽度
 @property (nonatomic, strong) NSMutableArray *itemsWidthArraM;
 
