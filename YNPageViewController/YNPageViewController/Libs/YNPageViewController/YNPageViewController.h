@@ -103,7 +103,8 @@
 @property (nonatomic, assign) NSInteger reloadPage;
 /// 头部伸缩背景View
 @property (nonatomic, strong) UIView *scaleBackgroundView;
-
+/// 页面ScrollView
+@property (nonatomic, strong) YNPageScrollView *pageScrollView;
 #pragma mark - initialize
 
 + (instancetype)new UNAVAILABLE_ATTRIBUTE;

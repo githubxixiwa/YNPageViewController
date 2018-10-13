@@ -72,7 +72,7 @@
     configration.showBottomLine = YES;
     /// 设置悬浮停顿偏移量
     configration.suspenOffsetY = kYNPAGE_NAVHEIGHT;
-    
+    configration.headerViewCouldScale = YES;
     
     YNPageViewController *vc = [YNPageViewController pageViewControllerWithControllers:self.getArrayVCs
                                                                                 titles:[self getArrayTitles]

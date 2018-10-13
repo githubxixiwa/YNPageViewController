@@ -17,8 +17,7 @@
 
 /// 一个HeaderView的背景View
 @property (nonatomic, strong) YNPageHeaderScrollView *headerBgView;
-/// 页面ScrollView
-@property (nonatomic, strong) YNPageScrollView *pageScrollView;
+
 /// 展示控制器的字典
 @property (nonatomic, strong) NSMutableDictionary *displayDictM;
 /// 字典控制器的字典
