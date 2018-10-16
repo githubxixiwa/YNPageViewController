@@ -59,7 +59,6 @@
 }
 
 - (void)setupPageVC {
-    
     YNPageConfigration *configration = [YNPageConfigration defaultConfig];
     configration.pageStyle = YNPageStyleSuspensionCenter;
     configration.headerViewCouldScale = YES;
