@@ -33,13 +33,15 @@
     
     _dataArray = @[].mutableCopy;
     /// 加载数据
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        for (int i = 0; i < 40; i++) {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        for (int i = 0; i < 30; i++) {
             [_dataArray addObject:@""];
         }
         [self.tableView reloadData];
     });
     [self addTableViewRefresh];
+    
+    
     
 }
 
@@ -66,8 +68,6 @@
     NSLog(@"--%@--%@", [self class], NSStringFromSelector(_cmd));
 }
 
-
-
 /// 添加下拉刷新
 - (void)addTableViewRefresh {
     
@@ -77,9 +77,9 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             for (int i = 0; i < 3; i++) {
-                [self.dataArray addObject:@""];
+                [weakSelf.dataArray addObject:@""];
             }
-            [self.tableView reloadData];
+            [weakSelf.tableView reloadData];
             if (kOpenRefreshHeaderViewHeight) {
                 [weakSelf suspendTopReloadHeaderViewHeight];
             } else {
@@ -92,18 +92,16 @@
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             for (int i = 0; i < 3; i++) {
-                [self.dataArray addObject:@""];
+                [weakSelf.dataArray addObject:@""];
             }
-            [self.tableView reloadData];
+            [weakSelf.tableView reloadData];
             [weakSelf.tableView.mj_footer endRefreshing];
         });
     }];
-    
 }
 
 #pragma mark - 悬浮Center刷新高度方法
 - (void)suspendTopReloadHeaderViewHeight {
-    
     /// 布局高度
     CGFloat netWorkHeight = 300;
     __weak typeof (self) weakSelf = self;
@@ -116,7 +114,6 @@
             [VC reloadSuspendHeaderViewFrame];
         }
     }];
-    
 }
 #pragma mark - 求出占位cell高度
 - (CGFloat)placeHolderCellHeight {
@@ -168,17 +165,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"id"];
-    
     if (indexPath.row < self.dataArray.count) {
-        
         cell.textLabel.text = [NSString stringWithFormat:@"%@ section: %zd row:%zd", self.cellTitle ?: @"测试", indexPath.section, indexPath.row];
         return cell;
     } else {
         cell.textLabel.text = @"";
     }
-    
     return cell;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -195,4 +188,9 @@
     }
     return _tableView;
 }
+
+- (void)dealloc {
+    NSLog(@"----- %@ delloc", self.class);
+}
+
 @end

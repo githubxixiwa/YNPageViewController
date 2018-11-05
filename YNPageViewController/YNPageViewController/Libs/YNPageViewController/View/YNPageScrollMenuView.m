@@ -232,6 +232,7 @@
     }
     
     /// 颜色
+    currentButton.selected = YES;
     [currentButton setTitleColor:self.configration.selectedItemColor forState:UIControlStateNormal];
     currentButton.titleLabel.font = self.configration.selectedItemFont;
     /// 线条
@@ -277,11 +278,12 @@
         }
         /// 颜色
         [self.itemsArrayM enumerateObjectsUsingBlock:^(UIButton  * obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.selected = NO;
             [obj setTitleColor:self.configration.normalItemColor forState:UIControlStateNormal];
             obj.titleLabel.font = self.configration.itemFont;
             if (idx == self.itemsArrayM.count - 1) {
-                
-                [currentButton setTitleColor:self.configration.selectedItemColor forState:UIControlStateNormal];
+               currentButton.selected = YES;
+               [currentButton setTitleColor:self.configration.selectedItemColor forState:UIControlStateNormal];
                 currentButton.titleLabel.font = self.configration.selectedItemFont;
             }
         }];
@@ -384,15 +386,18 @@
         [currentButton setTitleColor:selColor forState:UIControlStateNormal];
     } else{
         if (progress > 0.5) {
+            lastButton.selected = NO;
+            currentButton.selected = YES;
             [lastButton setTitleColor:self.configration.normalItemColor forState:UIControlStateNormal];
             [currentButton setTitleColor:self.configration.selectedItemColor forState:UIControlStateNormal];
             currentButton.titleLabel.font = self.configration.selectedItemFont;
             
         } else if (progress < 0.5 && progress > 0){
+            lastButton.selected = YES;
             [lastButton setTitleColor:self.configration.selectedItemColor forState:UIControlStateNormal];
             lastButton.titleLabel.font = self.configration.selectedItemFont;
             
-            
+            currentButton.selected = NO;
             [currentButton setTitleColor:self.configration.normalItemColor forState:UIControlStateNormal];
             currentButton.titleLabel.font = self.configration.itemFont;
             
@@ -406,22 +411,33 @@
         lastButton.titleLabel.font = self.configration.selectedItemFont;
         currentButton.titleLabel.font = self.configration.itemFont;
     }
-    
-    CGFloat xD = currentButton.yn_x - lastButton.yn_x;
-    CGFloat wD = currentButton.yn_width - lastButton.yn_width;
+    CGFloat xD = 0;
+    CGFloat wD = 0;
+    if (!self.configration.scrollMenu &&
+        !self.configration.aligmentModeCenter &&
+        self.configration.lineWidthEqualFontWidth) {
+        xD = currentButton.titleLabel.yn_x + currentButton.yn_x -( lastButton.titleLabel.yn_x + lastButton.yn_x );
+        
+        wD = currentButton.titleLabel.yn_width - lastButton.titleLabel.yn_width;
+    } else {
+        xD = currentButton.yn_x - lastButton.yn_x;
+        wD = currentButton.yn_width - lastButton.yn_width;
+    }
     
     /// 线条
     if (self.configration.showScrollLine) {
-        self.lineView.yn_x = lastButton.yn_x + xD *progress - self.configration.lineLeftAndRightAddWidth + self.configration.lineLeftAndRightMargin;
-        self.lineView.yn_width = lastButton.yn_width + wD *progress + self.configration.lineLeftAndRightAddWidth *2 - 2 * self.configration.lineLeftAndRightMargin;
         
         if (!self.configration.scrollMenu &&
             !self.configration.aligmentModeCenter &&
             self.configration.lineWidthEqualFontWidth) { /// 处理Line宽度等于字体宽度
             self.lineView.yn_x = lastButton.yn_x + ([lastButton yn_width]  - ([self.itemsWidthArraM[lastButton.tag] floatValue])) / 2 - self.configration.lineLeftAndRightAddWidth + xD *progress;
+            
             self.lineView.yn_width = [self.itemsWidthArraM[lastButton.tag] floatValue] + self.configration.lineLeftAndRightAddWidth *2 + wD *progress;
+            
+        } else {
+            self.lineView.yn_x = lastButton.yn_x + xD *progress - self.configration.lineLeftAndRightAddWidth + self.configration.lineLeftAndRightMargin;
+            self.lineView.yn_width = lastButton.yn_width + wD *progress + self.configration.lineLeftAndRightAddWidth *2 - 2 * self.configration.lineLeftAndRightMargin;
         }
-        
     }
     /// 遮盖
     if (self.configration.showConver) {

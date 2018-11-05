@@ -16,6 +16,7 @@
  - YNPageStyleSuspensionTop: MenuView悬浮，刷新控件在HeaderView顶部
  - YNPageStyleSuspensionCenter: MenuView悬浮，刷新控件在HeaderView底部
  - YNPageStyleSuspensionTopPause: MenuView悬浮，刷新控件在HeaderView顶部 停顿 类似QQ联系人页面
+   SuspensionTopPause 需要继承YNPageTableView或YNPageCollectionView 实现那个手势 YES,如果有自己的集成体系，则单独实现那个方法
  */
 typedef NS_ENUM(NSInteger, YNPageStyle) {
     YNPageStyleTop = 0,
@@ -43,11 +44,14 @@ typedef NS_ENUM(NSInteger, YNPageHeaderViewScaleMode) {
 @property (nonatomic, assign) BOOL showNavigation;
 /** 是否显示Tabbar NO */
 @property (nonatomic, assign) BOOL showTabbar;
+/** 裁剪内容高度 用来添加最上层控件 添加在父类view上 */
+@property (nonatomic, assign) CGFloat cutOutHeight;
 /** 菜单位置风格 默认 YNPageStyleTop */
 @property (nonatomic, assign) YNPageStyle pageStyle;
 /** 悬浮ScrollMenu偏移量 默认 0 */
 @property (nonatomic, assign) CGFloat suspenOffsetY;
-
+/** 页面是否可以滚动 默认 YES */
+@property (nonatomic, assign) BOOL pageScrollEnabled;
 /** 头部是否能伸缩效果   要伸缩效果最好不要有下拉刷新控件 NO */
 @property (nonatomic, assign) BOOL headerViewCouldScale;
 /** 头部伸缩效果 */

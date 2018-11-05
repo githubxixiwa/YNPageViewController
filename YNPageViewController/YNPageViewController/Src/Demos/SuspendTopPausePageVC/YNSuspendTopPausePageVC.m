@@ -81,21 +81,29 @@
     
 //    vc.headerView = headerView;
     /// 指定默认选择index 页面
-    /// vc.pageIndex = 0;
+    vc.pageIndex = 1;
+    
+    __weak typeof(YNSuspendTopPausePageVC *) weakVC = vc;
     
     vc.bgScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        NSInteger refreshPage = weakVC.pageIndex;
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
+            /// 取到之前的页面进行刷新 pageIndex 是当前页面
+            YNSuspendTopPauseBaseTableViewVC *vc2 = weakVC.controllersM[refreshPage];
+            [vc2.tableView reloadData];
+            
             if (kOpenRefreshHeaderViewHeight) {
-                vc.headerView.yn_height = 300;
-                [vc.bgScrollView.mj_header endRefreshing];
-                [vc reloadSuspendHeaderViewFrame];
+                weakVC.headerView.yn_height = 300;
+                [weakVC.bgScrollView.mj_header endRefreshing];
+                [weakVC reloadSuspendHeaderViewFrame];
             } else {
-                [vc.bgScrollView.mj_header endRefreshing];
+                [weakVC.bgScrollView.mj_header endRefreshing];
             }
         });
     }];
-    
     
     return vc;
 }
@@ -139,7 +147,7 @@
 - (void)pageViewController:(YNPageViewController *)pageViewController
             contentOffsetY:(CGFloat)contentOffset
                   progress:(CGFloat)progress {
-    //        NSLog(@"--- contentOffset = %f,    progress = %f", contentOffset, progress);
+            NSLog(@"--- contentOffset = %f,    progress = %f", contentOffset, progress);
 }
 
 #pragma mark - SDCycleScrollViewDelegate

@@ -11,6 +11,7 @@
 #import "YNPageScrollMenuView.h"
 #import "YNPageScrollView.h"
 
+
 @class YNPageViewController;
 
 @protocol YNPageViewControllerDelegate <NSObject>
@@ -55,6 +56,17 @@
 
 
 /**
+ 点击菜单栏Item的即刻回调
+
+ @param pageViewController PageVC
+ @param itemButton item
+ @param index 下标
+ */
+- (void)pageViewController:(YNPageViewController *)pageViewController
+         didScrollMenuItem:(UIButton *)itemButton
+                     index:(NSInteger)index;
+
+/**
  点击UIScrollMenuView AddAction
  
  @param pageViewController PageVC
@@ -62,6 +74,7 @@
  */
 - (void)pageViewController:(YNPageViewController *)pageViewController
         didAddButtonAction:(UIButton *)button;
+
 
 @end
 
@@ -71,12 +84,24 @@
 /**
  根据 index 取 数据源 ScrollView
  
- @param pageViewController 当前控制器
+ @param pageViewController PageVC
  @param index pageIndex
  @return 数据源
  */
-- (UIScrollView *)pageViewController:(YNPageViewController *)pageViewController
-                        pageForIndex:(NSInteger )index;
+- (__kindof UIScrollView *)pageViewController:(YNPageViewController *)pageViewController
+                                 pageForIndex:(NSInteger )index;
+
+
+@optional
+/**
+ 自定义缓存Key 如果不实现，则不允许相同的菜单栏title
+ 如果对页面进行了添加、删除、调整顺序、请一起调整传递进来的数据源，防止缓存Key取错
+ @param pageViewController pageVC
+ @param index pageIndex
+ @return 唯一标识 (一般是后台ID)
+ */
+- (NSString *)pageViewController:(YNPageViewController *)pageViewController
+          customCacheKeyForIndex:(NSInteger )index;
 
 @end
 
@@ -84,13 +109,13 @@
 /// 配置信息
 @property (nonatomic, strong) YNPageConfigration *config;
 /// 控制器数组
-@property (nonatomic, strong) NSMutableArray *controllersM;
-/// 标题数组
-@property (nonatomic, strong) NSMutableArray *titlesM;
+@property (nonatomic, strong) NSMutableArray<__kindof UIViewController *> *controllersM;
+/// 标题数组 默认 缓存 key 为 title 可通过数据源代理 进行替换
+@property (nonatomic, strong) NSMutableArray<NSString *> *titlesM;
 /// 菜单栏
 @property (nonatomic, strong) YNPageScrollMenuView *scrollMenuView;
 /// 背景ScrollView
-@property (nonatomic, strong) YNPageScrollView *bgScrollView;
+@property (nonatomic, strong, readonly) YNPageScrollView *bgScrollView;
 /// 头部headerView
 @property (nonatomic, strong) UIView *headerView;
 /// 数据源
@@ -142,11 +167,22 @@
 - (void)removeSelfViewController;
 
 /**
+ 刷新数据页面、所有View、菜单栏、headerView - 默认移除缓存控制器
+ 刷新菜单栏配置 标题数组
+ e.g: vc.config = ...
+ vc.titlesM = [self getArrayTitles].mutableCopy;
+ 
+ 如果需要重新走控制器的ViewDidLoad方法则需要重新赋值 controllers
+ e.g:
+ vc.controllersM = [self getArrayVCs].mutableCopy;
+ */
+- (void)reloadData;
+
+/**
  选中页码
  @param pageIndex 页面下标
  */
 - (void)setSelectedPageIndex:(NSInteger)pageIndex;
-
 
 /**
  更新菜单栏标题
@@ -203,5 +239,7 @@
  @param animated 是否动画
  */
 - (void)scrollToTop:(BOOL)animated;
+
+
 
 @end

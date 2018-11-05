@@ -11,7 +11,6 @@
 #import "BaseTableViewVC.h"
 #import "BaseCollectionViewVC.h"
 
-
 @interface YNSuspendCenterPageVC () <YNPageViewControllerDataSource, YNPageViewControllerDelegate, SDCycleScrollViewDelegate>
 
 @property (nonatomic, copy) NSArray *imagesURLs;
@@ -19,13 +18,15 @@
 /** <#Description#> */
 @property (nonatomic, strong) YNPageConfigration *configration;
 
+@property (nonatomic, copy) NSArray *cacheKeyArray;
+
+
 @end
 
 @implementation YNSuspendCenterPageVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 }
 #pragma mark - Event Response
 
@@ -51,7 +52,7 @@
     configration.showNavigation = YES;
     configration.scrollMenu = NO;
     configration.aligmentModeCenter = NO;
-    configration.lineWidthEqualFontWidth = NO;
+    configration.lineWidthEqualFontWidth = true;
     configration.showBottomLine = YES;
     return [self suspendCenterPageVCWithConfig:configration];
 }
@@ -70,7 +71,6 @@
     vc.headerView = autoScrollView;
     /// 指定默认选择index 页面
     vc.pageIndex = 2;
-    
     
     return vc;
 }
@@ -104,6 +104,14 @@
     }
     return _imagesURLs;
 }
+
+- (NSArray *)cacheKeyArray {
+    if (!_cacheKeyArray) {
+        _cacheKeyArray = @[@"1", @"2", @"3"];
+    }
+    return _cacheKeyArray;
+}
+
 #pragma mark - YNPageViewControllerDataSource
 - (UIScrollView *)pageViewController:(YNPageViewController *)pageViewController pageForIndex:(NSInteger)index {
     UIViewController *vc = pageViewController.controllersM[index];
@@ -124,10 +132,17 @@
 //        NSLog(@"--- contentOffset = %f,    progress = %f", contentOffset, progress);
 }
 
-
 #pragma mark - SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     NSLog(@"----click 轮播图 index %ld", index);
+}
+
+//- (NSString *)pageViewController:(YNPageViewController *)pageViewController customCacheKeyForIndex:(NSInteger)index {
+//    return self.cacheKeyArray[index];
+//}
+
+- (void)pageViewController:(YNPageViewController *)pageViewController didScrollMenuItem:(UIButton *)itemButton index:(NSInteger)index {
+    NSLog(@"didScrollMenuItem index %ld", index);
 }
 
 @end
