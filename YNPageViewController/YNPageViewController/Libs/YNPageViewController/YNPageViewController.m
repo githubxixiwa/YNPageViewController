@@ -17,8 +17,6 @@
 
 /// 一个HeaderView的背景View
 @property (nonatomic, strong) YNPageHeaderScrollView *headerBgView;
-/// 页面ScrollView
-@property (nonatomic, strong) YNPageScrollView *pageScrollView;
 /// 背景ScrollView
 @property (nonatomic, strong, readwrite) YNPageScrollView *bgScrollView;
 /// 展示控制器的字典
